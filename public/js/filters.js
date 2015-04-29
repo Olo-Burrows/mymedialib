@@ -19,9 +19,9 @@ mymedialibApp.filter('stars', function () {
 mymedialibApp.filter('poster', function () {
     return function (posterUrl) {
         if (!posterUrl) {
-            return "img/no-poster.jpg";
+            return "img/posters/no-poster.jpg";
         } else {
-            return posterUrl;
+            return "img/posters/" + posterUrl;
         }
     };
 });
