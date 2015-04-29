@@ -1,4 +1,6 @@
-bin/*
+id_rsa_olo
+id_rsa_olo.pub
+
 data/*
 node_modules/*
 
