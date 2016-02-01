@@ -1,6 +1,11 @@
 id_rsa_olo
 id_rsa_olo.pub
 
-data/*
-node_modules/*
+/data
+/node_modules
+/bower_components
+
+**/data
+**/node_modules
+**/bower_components
 
