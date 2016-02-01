@@ -1,9 +1,0 @@
-extends layout
-
-block content
-    h1.
-        Movies
-    ul
-        each movie, i in movies
-            li
-                a(href="#{movie.poster}")= movie.title
