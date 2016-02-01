@@ -1,6 +1,7 @@
 id_rsa_olo
 id_rsa_olo.pub
-npm-debug.log
+
+**/npm-debug.log
 
 /data
 /node_modules

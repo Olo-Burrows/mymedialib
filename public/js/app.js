@@ -1,6 +1,7 @@
 "use strict";
 
-var mymedialibApp = angular.module('mymedialibApp', ['$strap.directives']);
+//var mymedialibApp = angular.module('mymedialibApp', ['$strap.directives']);
+var mymedialibApp = angular.module('mymedialibApp', [ 'ngRoute' ]);
 
 mymedialibApp.config(function ($routeProvider) {
     $routeProvider
