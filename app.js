@@ -8,8 +8,8 @@ var bodyParser = require('body-parser');
 // config files
 var db = require('./db/config');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
+var movies = require('./routes/movies');
+//var users = require('./routes/users');
 
 var app = express();
 
@@ -28,8 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // bower_components
 app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.use('/', movies);
+//app.use('/', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

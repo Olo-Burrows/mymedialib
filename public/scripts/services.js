@@ -9,20 +9,20 @@ mymedialibApp.service("Movie", function($http) {
             return $http.get(API_URI);
         },
 
-        create: function(movie) {
-            return $http.post(API_URI, movie);
-        },
-
-        remove: function(id) {
-            return $http.delete(API_URI + '/' + id);
-        },
-
         fetchOne: function(id) {
             return $http.get(API_URI + '/' + id);
         },
 
+        create: function(movie) {
+            return $http.post(API_URI, movie);
+        },
+
         update: function(movie) {
-            return $http.put(API_URI + '/' + movie._id, movie);
+            return $http.put(API_URI + '/' + movie.id, movie);
+        },
+
+        remove: function(id) {
+            return $http.delete(API_URI + '/' + id);
         }
 
     };

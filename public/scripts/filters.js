@@ -21,7 +21,7 @@ mymedialibApp.filter('poster', function () {
         if (!posterUrl) {
             return "img/posters/no-poster.jpg";
         } else {
-            return "img/posters/" + posterUrl;
+            return posterUrl;
         }
     };
 });

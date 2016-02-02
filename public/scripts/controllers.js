@@ -24,8 +24,8 @@ mymedialibApp.controller("moviesController", function ($scope, Movie) {
         }
     };
 
-    Movie.fetch().success(function (resp) {
-        $scope.movies = resp.movies;
+    Movie.fetch().success(function (movies) {
+        $scope.movies = movies;
     });
 
 
