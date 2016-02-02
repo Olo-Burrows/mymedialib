@@ -1,7 +1,7 @@
 id_rsa_olo
 id_rsa_olo.pub
 
-**/npm-debug.log
+npm-debug.log
 
 /data
 /node_modules
@@ -11,3 +11,4 @@ id_rsa_olo.pub
 **/node_modules
 **/bower_components
 
+_data/db.json*
