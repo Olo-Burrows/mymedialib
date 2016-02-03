@@ -25,3 +25,15 @@ mymedialibApp.filter('poster', function () {
         }
     };
 });
+
+mymedialibApp.filter('director', function (DirectorService) {
+    return function (id) {
+        var name = "",
+            director;
+
+        director = DirectorService.fetchOne(id).success(function (director) {
+            name = director.name;
+        });
+        return name;
+    };
+});

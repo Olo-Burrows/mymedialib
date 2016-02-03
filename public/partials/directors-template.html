@@ -1,0 +1,8 @@
+<span>
+    <span ng-show="{{mode == 'view'}}">{{name}}</span>
+    <span ng-show="{{mode == 'edit'}}">
+        <select name="directorSelect" id="directorSelect" ng-model="directorId">
+            <option ng-repeat="director in directors" value="{{director.id}}">{{director.name}}</option>
+        </select>
+    </span>
+</span>

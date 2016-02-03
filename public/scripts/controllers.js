@@ -6,7 +6,7 @@ mymedialibApp.controller("homeController", function ($scope) {
 
 });
 
-mymedialibApp.controller("moviesController", function ($scope, Movie) {
+mymedialibApp.controller("moviesController", function ($scope, MovieService) {
 
     // display mode by default
     $scope.tableView = false;
@@ -24,13 +24,13 @@ mymedialibApp.controller("moviesController", function ($scope, Movie) {
         }
     };
 
-    Movie.fetch().success(function (movies) {
+    MovieService.fetch().success(function (movies) {
         $scope.movies = movies;
     });
 
 
     $scope.deleteMovie = function (index) {
-        Movie.remove($scope.movies[index]._id)
+        MovieService.remove($scope.movies[index]._id)
             .success(function (resp) {
                 $scope.movies.splice(index, 1);
             });
@@ -38,16 +38,16 @@ mymedialibApp.controller("moviesController", function ($scope, Movie) {
 
 });
 
-mymedialibApp.controller('editMovieController', function ($scope, Movie, $routeParams, $location) {
+mymedialibApp.controller('editMovieController', function ($scope, MovieService, $routeParams, $location) {
 
     var movieId = $routeParams.id;
 
-    Movie.fetchOne(movieId).success(function (movie) {
+    MovieService.fetchOne(movieId).success(function (movie) {
         $scope.movie = movie;
     });
 
     $scope.updateMovie = function (movie) {
-        Movie.update(movie)
+        MovieService.update(movie)
             .success(function () {
                 $location.path('/movies');
             })
@@ -61,12 +61,12 @@ mymedialibApp.controller('editMovieController', function ($scope, Movie, $routeP
     };
 });
 
-mymedialibApp.controller("movieFormController", function ($scope, Movie) {
+mymedialibApp.controller("movieFormController", function ($scope, MovieService) {
 
     $scope.showAlert = false;
 
     $scope.addMovie = function (movie) {
-        Movie.create(movie)
+        MovieService.create(movie)
             .success(function () {
                 var newMovie = {};
                 angular.copy(movie, newMovie);
@@ -85,7 +85,7 @@ mymedialibApp.controller("movieFormController", function ($scope, Movie) {
 });
 
 
-mymedialibApp.controller("seriesController", function ($scope, Serie) {
+mymedialibApp.controller("seriesController", function ($scope, SerieService) {
 
     // display mode by default
     $scope.tableView = false;

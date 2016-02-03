@@ -21,3 +21,6 @@ TODO : à revoir
 * se placer à la racine du projet
 * exécuter <code>npm start</code>
 * Mode debug : exécuter <code>DEBUG=myapp:* npm start</code>
+
+## URL
+* http://localhost:3001/
