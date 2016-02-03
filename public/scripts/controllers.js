@@ -6,7 +6,7 @@ mymedialibApp.controller("homeController", function ($scope) {
 
 });
 
-mymedialibApp.controller("moviesController", function ($scope, MovieService) {
+mymedialibApp.controller("moviesController", function ($scope, $uibModal, MovieService) {
 
     // display mode by default
     $scope.tableView = false;
@@ -30,10 +30,25 @@ mymedialibApp.controller("moviesController", function ($scope, MovieService) {
 
 
     $scope.deleteMovie = function (index) {
-        MovieService.remove($scope.movies[index]._id)
+        MovieService.remove($scope.movies[index].id)
             .success(function (resp) {
                 $scope.movies.splice(index, 1);
             });
+    };
+
+    $scope.newMovie = function () {
+
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'partials/movie-form-modal.html',
+            controller: 'movieFormController'
+        });
+
+        modalInstance.result.then(function (movie) {
+            var newMovie = {};
+            angular.copy(movie, newMovie);
+            $scope.movies.push(newMovie);
+        });
     };
 
 });
@@ -61,27 +76,30 @@ mymedialibApp.controller('editMovieController', function ($scope, MovieService, 
     };
 });
 
-mymedialibApp.controller("movieFormController", function ($scope, MovieService) {
+mymedialibApp.controller("movieFormController", function ($scope, $uibModalInstance, MovieService) {
 
     $scope.showAlert = false;
-
+    
     $scope.addMovie = function (movie) {
         MovieService.create(movie)
             .success(function () {
-                var newMovie = {};
-                angular.copy(movie, newMovie);
-                $scope.movies.push(newMovie);
-                $scope.movie = {};
+                $scope.close = {};
                 $scope.showAlert = false;
-                $scope.dismiss();
-            })
-            .error(function (resp, statusCode) {
-                // Affichage d'un message d'erreur
-                $scope.errorTitle = 'Erreur ' + statusCode;
-                $scope.errorMessage = resp.error;
-                $scope.showAlert = true;
+                $uibModalInstance.close(movie);
+//            })
+//            .error(function (resp, statusCode) {
+//                // Affichage d'un message d'erreur
+//                $scope.errorTitle = 'Erreur ' + statusCode;
+//                $scope.errorMessage = resp.error;
+//                $scope.showAlert = true;
             });
     };
+    
+    $scope.close = function () {
+        $scope.movie = {};
+        $scope.showAlert = false;
+        $uibModalInstance.dismiss('cancel');
+    }
 });
 
 
@@ -92,5 +110,5 @@ mymedialibApp.controller("seriesController", function ($scope, SerieService) {
     // icon by mode by default
     $scope.tableViewIcon = 'icon-th-list icon-white';
 
-    
+
 });

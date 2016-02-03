@@ -21,17 +21,9 @@ router.route('/server/api/movies')
     })
     .post(function (req, res) {
         console.log(':: MOVIES :: insert movie');
-        db(DB_NAME).insert(req.body);
+        var movie = db(DB_NAME).insert(req.body);
+        res.send(movie);
     });
-//    .post(function(req, res) {
-//        var movie = req.body;
-//        var db = req.db;
-//        var collection = db.get('movies');
-//        collection.insert(movie, function(err, movie) {
-//            if (err) res.json(500, err);
-//            else res.json(201, movie);
-//        });
-//    });
 
 /* GET movie from id. */
 router.route('/server/api/movies/:id')
@@ -52,49 +44,5 @@ router.route('/server/api/movies/:id')
         var movie = db(DB_NAME).removeById(req.params.id);
         res.send(movie);
     });
-
-//    .get(function(req, res) {
-//        var db = req.db;
-//        var collection = db.get('movies');
-//        collection.findById(req.params.id, function(err, movie) {
-//            res.send(movie);
-//        });
-//    })
-//    .put(function(req, res) {
-//        var id = req.params.id;
-//        var movie = req.body;
-//        var db = req.db;
-//        var collection = db.get('movies');
-//        collection.update({ _id: id }, movie, function(err, movie) {
-//            if (err) res.json(500, err);
-//            else if (movie) res.json(movie);
-//            else res.json(404);
-//        });
-//    })
-//    .delete(function(req, res) {
-//        var id = req.params.id;
-//        var db = req.db;
-//        var collection = db.get('movies');
-//        collection.remove({ _id: id }, function(err) {
-//            if (err) res.json(500, err);
-//            else res.json(204);
-//        });
-//    });
-
-//// JSON API
-//app.get('/server/api/movies', api.fetchMovies);
-//app.get('/server/api/movies/:id', api.fetchMovie);
-//app.post('/server/api/movies', api.addMovie);
-//app.put('/server/api/movies', api.updateMovie);
-//app.delete('/server/api/movies/:id', api.deleteMovie);
-
-//// Deletes a movie
-//exports.del = function(req, res) {
-//	var id = req.params.id;
-//	collection.remove({_id: id}, function(err){
-//		if (err) res.json(500, err);
-//		else res.json(204);
-//	});
-//};
 
 module.exports = router;
