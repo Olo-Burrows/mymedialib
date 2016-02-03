@@ -3,30 +3,34 @@
 </header>
 
 <section>
-    <form class="form-horizontal">
-        <div class="control-group">
+    <alert-message show="showAlert" title="{{errorTitle}}" message="{{errorMessage}}"></alert-message>
+    <form name="movieForm" class="form-horizontal">
+        <div class="control-group" ng-class="{error : movieForm.inputTitle.$error.required}">
             <label class="control-label">Titre :</label>
-            <input type="text" ng-model="movie.title">
+            <input type="text" name="inputTitle" ng-model="movie.title" autofocus required>
+            <span class="help-block" ng-show="movieForm.inputTitle.$error.required">Le titre est obligatoire</span>
         </div>
-        <div class="control-group">
+        <div class="control-group" ng-class="{error : movieForm.inputYear.$error.pattern}">
             <label class="control-label">Année de sortie :</label>
-            <input type="text" ng-model="movie.releaseYear">
+            <input type="text" name="inputYear" ng-model="movie.releaseYear" ng-pattern="/(19|20)\d\d/">
+            <span class="help-block" ng-show="movieForm.inputYear.$error.pattern">L'année n'est pas valide</span>
         </div>
         <div class="control-group">
             <label class="control-label">Poster :</label>
             <input type="text" ng-model="movie.poster">
         </div>
         <div class="control-group">
-            <label class="control-label">Réalisateur :</label>
+            <label class="control-label">Réalisateur : </label>
             <director mode="edit" ng-model="movie.director"></director>
         </div>
         <div class="control-group">
             <label class="control-label">Acteurs :</label>
             <input type="text" ng-model="movie.actors">
         </div>
-        <div class="control-group">
+        <div class="control-group" ng-class="{error : movieForm.textareaSynopsis.$error.maxlength}">
             <label class="control-label">Synopsis :</label>
-            <textarea ng-model="movie.synopsis"></textarea>
+            <textarea ng-model="movie.synopsis" name="textareaSynopsis" ng-maxlength="500"></textarea>
+            <span class="help-block" ng-show="movieForm.textareaSynopsis.$error.maxlength">500 caractères maximum</span>
         </div>
         <div class="control-group">
             <label class="control-label">Saga :</label>
@@ -34,7 +38,7 @@
         </div>
         <footer class="form-actions">
             <a href="#/movies" class="btn btn-danger btn-small">Annuler</a>
-            <button class="btn btn-success" ng-click="updateMovie(movie)">Enregistrer</button>
+            <button class="btn btn-success" ng-click="updateMovie(movie)" ng-disabled="movieForm.$invalid">Enregistrer</button>
         </footer>
     </form>
 </section>

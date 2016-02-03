@@ -21,7 +21,8 @@ router.route('/server/api/directors')
     })
     .post(function (req, res) {
         console.log(':: DIRECTORS :: insert director');
-        db(DB_NAME).insert(req.body);
+        var director = db(DB_NAME).insert(req.body);
+        res.json(director);
     });
 
 /* GET director from id. */

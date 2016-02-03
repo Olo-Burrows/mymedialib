@@ -37,7 +37,6 @@ mymedialibApp.controller("moviesController", function ($scope, $uibModal, MovieS
     };
 
     $scope.newMovie = function () {
-
         var modalInstance = $uibModal.open({
             animation: true,
             templateUrl: 'partials/movie-form-modal.html',
@@ -48,6 +47,14 @@ mymedialibApp.controller("moviesController", function ($scope, $uibModal, MovieS
             var newMovie = {};
             angular.copy(movie, newMovie);
             $scope.movies.push(newMovie);
+        });
+    };
+    
+    $scope.openDirectors = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'partials/directors-modal.html',
+            controller: 'directorsController'
         });
     };
 
@@ -82,7 +89,7 @@ mymedialibApp.controller("movieFormController", function ($scope, $uibModalInsta
     
     $scope.addMovie = function (movie) {
         MovieService.create(movie)
-            .success(function () {
+            .success(function (resp) {
                 $scope.close = {};
                 $scope.showAlert = false;
                 $uibModalInstance.close(movie);
@@ -99,9 +106,35 @@ mymedialibApp.controller("movieFormController", function ($scope, $uibModalInsta
         $scope.movie = {};
         $scope.showAlert = false;
         $uibModalInstance.dismiss('cancel');
-    }
+    };
 });
 
+mymedialibApp.controller("directorsController", function ($scope, $uibModalInstance, DirectorService) {
+    
+    DirectorService.fetch().success(function (directors) {
+        $scope.directors = directors;
+    });
+    
+    $scope.add = function () {
+        var director = {
+            name: $scope.newdir
+        };
+        DirectorService.create(director).success(function () {
+            $scope.directors.push(director);
+            $scope.newdir = "";
+        });
+    };
+    
+    $scope.delete = function (index) {
+        DirectorService.remove($scope.directors[index].id).success(function () {
+            $scope.directors.splice(index, 1);
+        });
+    };
+
+    $scope.close = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
 
 mymedialibApp.controller("seriesController", function ($scope, SerieService) {
 
