@@ -1,0 +1,8 @@
+<span class="sagas-widget">
+    <span ng-show="{{mode == 'view'}}">{{title}}</span>
+    <span ng-show="{{mode == 'edit'}}">
+        <select name="sagaSelect" id="sagaSelect" ng-model="sagaId">
+            <option ng-repeat="saga in sagas" value="{{saga.id}}">{{saga.title}}</option>
+        </select>
+    </span>
+</span>

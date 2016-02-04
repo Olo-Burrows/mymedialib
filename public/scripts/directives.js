@@ -10,7 +10,7 @@ mymedialibApp.directive('alertMessage', function () {
             "<button class='btn btn-warning' ng-click='sendLog()'>Envoyer les logs</button>" +
             "</p>" +
             "</div>",
-        //templateUrl : 'partials/alert-message.html',
+        //templateUrl : 'templates/alert-message.html',
         replace: true,
         restrict: 'E',
         scope: {
@@ -46,7 +46,7 @@ mymedialibApp.directive('director', function (DirectorService) {
             id: '@',
             directorId: '=ngModel'
         },
-        templateUrl: 'partials/directors-template.html',
+        templateUrl: 'templates/directors-template.html',
         link: function (scope, element, attr) {
             if (scope.mode == 'view') {
                 DirectorService.fetchOne(scope.id).success(function (director) {
@@ -55,6 +55,30 @@ mymedialibApp.directive('director', function (DirectorService) {
             } else if (scope.mode == 'edit') {
                 DirectorService.fetch().success(function (directors) {
                     scope.directors = directors;
+                });
+            }
+        }
+    };
+});
+
+mymedialibApp.directive('saga', function (SagaService) {
+    return {
+        restrict: 'E',
+        replace: true,
+        scope: {
+            mode: '@',
+            id: '@',
+            sagaId: '=ngModel'
+        },
+        templateUrl: 'templates/sagas-template.html',
+        link: function (scope, element, attr) {
+            if (scope.mode == 'view') {
+                SagaService.fetchOne(scope.id).success(function (saga) {
+                    scope.title = saga.title;
+                });
+            } else if (scope.mode == 'edit') {
+                SagaService.fetch().success(function (sagas) {
+                    scope.sagas = sagas;
                 });
             }
         }

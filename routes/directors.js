@@ -21,8 +21,11 @@ router.route('/server/api/directors')
     })
     .post(function (req, res) {
         console.log(':: DIRECTORS :: insert director');
-        var director = db(DB_NAME).insert(req.body);
-        res.json(director);
+        db(DB_NAME).insert(req.body).then(function (director) {
+            res.send(director);
+        }, function (err) {
+            res.status(500).send({ error: err });
+        });
     });
 
 /* GET director from id. */
@@ -34,10 +37,9 @@ router.route('/server/api/directors/:id')
     })
     .put(function (req, res) {
         console.log(':: DIRECTORS :: update director / id : ' + req.params.id);
-        var id = req.params.id,
-            director = req.body;
-        var upDirector = db(DB_NAME).updateById(id, director);
-        res.send(upDirector);
+        var id = req.params.id;
+        db(DB_NAME).updateById(id, req.body);
+        res.send();
     })
     .delete(function (req, res) {
         console.log(':: DIRECTORS :: delete director / id : ' + req.params.id);

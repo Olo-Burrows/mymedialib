@@ -39,7 +39,7 @@ mymedialibApp.controller("moviesController", function ($scope, $uibModal, MovieS
     $scope.newMovie = function () {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'partials/movie-form-modal.html',
+            templateUrl: 'templates/movie-form-modal.html',
             controller: 'movieFormController'
         });
 
@@ -53,8 +53,15 @@ mymedialibApp.controller("moviesController", function ($scope, $uibModal, MovieS
     $scope.openDirectors = function () {
         var modalInstance = $uibModal.open({
             animation: true,
-            templateUrl: 'partials/directors-modal.html',
+            templateUrl: 'templates/directors-modal.html',
             controller: 'directorsController'
+        });
+    };
+    $scope.openSagas = function () {
+        var modalInstance = $uibModal.open({
+            animation: true,
+            templateUrl: 'templates/sagas-modal.html',
+            controller: 'sagasController'
         });
     };
 
@@ -90,7 +97,7 @@ mymedialibApp.controller("movieFormController", function ($scope, $uibModalInsta
     $scope.addMovie = function (movie) {
         MovieService.create(movie)
             .success(function (resp) {
-                $scope.close = {};
+                $scope.movie = {};
                 $scope.showAlert = false;
                 $uibModalInstance.close(movie);
 //            })
@@ -119,7 +126,7 @@ mymedialibApp.controller("directorsController", function ($scope, $uibModalInsta
         var director = {
             name: $scope.newdir
         };
-        DirectorService.create(director).success(function () {
+        DirectorService.create(director).success(function (director) {
             $scope.directors.push(director);
             $scope.newdir = "";
         });
@@ -128,6 +135,33 @@ mymedialibApp.controller("directorsController", function ($scope, $uibModalInsta
     $scope.delete = function (index) {
         DirectorService.remove($scope.directors[index].id).success(function () {
             $scope.directors.splice(index, 1);
+        });
+    };
+
+    $scope.close = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});
+
+mymedialibApp.controller("sagasController", function ($scope, $uibModalInstance, SagaService) {
+    
+    SagaService.fetch().success(function (sagas) {
+        $scope.sagas = sagas;
+    });
+    
+    $scope.add = function () {
+        var saga = {
+            title: $scope.newsaga
+        };
+        SagaService.create(saga).success(function (saga) {
+            $scope.sagas.push(saga);
+            $scope.newsaga = "";
+        });
+    };
+    
+    $scope.delete = function (index) {
+        SagaService.remove($scope.sagas[index].id).success(function () {
+            $scope.sagas.splice(index, 1);
         });
     };
 

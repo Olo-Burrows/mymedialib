@@ -28,3 +28,12 @@ input::-webkit-inner-spin-button {
 .control-group .help-block {
     margin-left: 180px;
 }
+
+section.hero-unit p.small {
+    font-size: 12px;
+}
+
+.directors-widget select,
+.sagas-widget select {
+    margin-left: 20px;
+}

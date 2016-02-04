@@ -3,6 +3,7 @@
     <h1>Mes films <small>{{movies.length}} films</small>
         <button class="btn btn-primary" ng-click="newMovie()">Ajouter un film</button>
         <button class="btn btn-primary" ng-click="openDirectors()">Réalisateurs</button>
+        <button class="btn btn-primary" ng-click="openSagas()">Sagas</button>
     </h1>
 </header>
 
@@ -31,7 +32,8 @@
             <p><b>Réalisateur : </b><director id="{{movie.director}}" mode="view"></director></p>
             <p><b>Acteurs : </b>{{movie.actors}}</p>
             <p><b>Synopsis : </b>{{movie.synopsis}}</p>
-            <p><b>Saga : </b>{{movie.saga}}</p>
+            <p ng-show="movie.saga"><b>Saga : </b><saga id="{{movie.saga}}" mode="view"></saga></p>
+            <p ng-show="movie.rate"><b>Note : </b> {{movie.rate | stars}}</p>
         </div>
     </li>
 </ul>
@@ -43,6 +45,7 @@
         <th>Réalisateur</th>
         <th>Année de sortie</th>
         <th>Saga</th>
+        <th>Note</th>
     </tr>
     </thead>
     <tbody>
@@ -51,7 +54,8 @@
         <td>{{movie.title | uppercase}}</td>
         <td><director id="{{movie.director}}" mode="view"></director></td>
         <td>{{movie.releaseYear}}</td>
-        <td>{{movie.saga}}</td>
+        <td><saga id="{{movie.saga}}" mode="view"></saga></td>
+        <td>{{movie.rate | stars}}</td>
     </tr>
     </tbody>
 </table>

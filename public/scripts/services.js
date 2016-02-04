@@ -4,7 +4,6 @@ mymedialibApp.service("MovieService", function($http) {
     var API_URI = '/server/api/movies';
 
     return {
-
         fetch: function() {
             return $http.get(API_URI);
         },
@@ -24,16 +23,13 @@ mymedialibApp.service("MovieService", function($http) {
         remove: function(id) {
             return $http.delete(API_URI + '/' + id);
         }
-
     };
-
 });
 
 mymedialibApp.service("DirectorService", function($http) {
     var API_URI = '/server/api/directors';
 
     return {
-
         fetch: function() {
             return $http.get(API_URI);
         },
@@ -53,16 +49,39 @@ mymedialibApp.service("DirectorService", function($http) {
         remove: function(id) {
             return $http.delete(API_URI + '/' + id);
         }
-
     };
+});
 
+mymedialibApp.service("SagaService", function($http) {
+    var API_URI = '/server/api/sagas';
+
+    return {
+        fetch: function() {
+            return $http.get(API_URI);
+        },
+
+        fetchOne: function(id) {
+            return $http.get(API_URI + '/' + id);
+        },
+
+        create: function(saga) {
+            return $http.post(API_URI, saga);
+        },
+
+        update: function(saga) {
+            return $http.put(API_URI + '/' + saga.id, saga);
+        },
+
+        remove: function(id) {
+            return $http.delete(API_URI + '/' + id);
+        }
+    };
 });
 
 mymedialibApp.service("SerieService", function($http) {
     var API_URI = '/server/api/series';
 
     return {
-
         fetch: function() {
             return $http.get(API_URI);
         },
@@ -82,7 +101,5 @@ mymedialibApp.service("SerieService", function($http) {
         remove: function(id) {
             return $http.delete(API_URI + '/' + id);
         }
-
     };
-
 });

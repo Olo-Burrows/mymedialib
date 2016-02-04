@@ -10,6 +10,7 @@ var db = require('./db/config');
 
 var movies = require('./routes/movies');
 var directors = require('./routes/directors');
+var sagas = require('./routes/sagas');
 //var users = require('./routes/users');
 
 var app = express();
@@ -31,6 +32,7 @@ app.use('/bower_components', express.static(path.join(__dirname, 'bower_componen
 
 app.use('/', movies);
 app.use('/', directors);
+app.use('/', sagas);
 //app.use('/', users);
 
 // catch 404 and forward to error handler

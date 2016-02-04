@@ -6,19 +6,19 @@ var mymedialibApp = angular.module('mymedialibApp', [ 'ngRoute', 'ui.bootstrap' 
 mymedialibApp.config(function ($routeProvider) {
     $routeProvider
         .when('/home', {
-            templateUrl: 'partials/home.html',
+            templateUrl: 'templates/home.html',
             controller: 'homeController'
         })
         .when('/movies', {
-            templateUrl: 'partials/movies.html',
+            templateUrl: 'templates/movies.html',
             controller: 'moviesController'
         })
         .when('/series', {
-            templateUrl: 'partials/series.html',
+            templateUrl: 'templates/series.html',
             controller: 'seriesController'
         })
         .when('/movies/edit/:id', {
-            templateUrl: 'partials/edit.html',
+            templateUrl: 'templates/edit.html',
             controller: 'editMovieController'
         })
         .otherwise({

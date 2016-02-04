@@ -21,8 +21,11 @@ router.route('/server/api/movies')
     })
     .post(function (req, res) {
         console.log(':: MOVIES :: insert movie');
-        var movie = db(DB_NAME).insert(req.body);
-        res.send(movie);
+        db(DB_NAME).insert(req.body).then(function (movie) {
+            res.send(movie);
+        }, function (err) {
+            res.status(500).send({ error: err });
+        });
     });
 
 /* GET movie from id. */
@@ -34,10 +37,9 @@ router.route('/server/api/movies/:id')
     })
     .put(function (req, res) {
         console.log(':: MOVIES :: update movie / id : ' + req.params.id);
-        var id = req.params.id,
-            movie = req.body;
-        var upMovie = db(DB_NAME).updateById(id, movie);
-        res.send(upMovie);
+        var id = req.params.id;
+        db(DB_NAME).updateById(id, req.body);
+        res.send();
     })
     .delete(function (req, res) {
         console.log(':: MOVIES :: delete movie / id : ' + req.params.id);
