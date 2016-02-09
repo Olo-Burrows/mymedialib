@@ -3,12 +3,10 @@ id_rsa_olo.pub
 
 npm-debug.log
 
-/data
 /node_modules
 /bower_components
 
-**/data
 **/node_modules
 **/bower_components
 
-_data/db.json*
+**/db.json
